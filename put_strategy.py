@@ -29,8 +29,12 @@ def put_strategy(game):
     if pos_doozes:
         return game.put(Pos(pos_doozes[0][0], pos_doozes[0][1]))
 
-    # enemy_cells = game.get_board().get_oppcells()
-    # pos_doozes = pos_dooz(game, [(i.get_pos().getx(), i.get_pos().gety()) for i in enemy_cells])
+    enemy_cells = game.get_board().get_oppcells()
+    enemy_pos_doozes = pos_dooz(game, [(i.get_pos().getx(), i.get_pos().gety()) for i in enemy_cells])
+
+    if len(enemy_pos_doozes) == 1:
+        # print("prevent enemy", enemy_pos_doozes[0])
+        return game.put(Pos(enemy_pos_doozes[0][0], enemy_pos_doozes[0][1]))
 
 
     print("\n\n")
