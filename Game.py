@@ -8,6 +8,7 @@ from move_strategy import move_strategy
 import socket
 from time import sleep
 
+
 def simplelinesplit(sock):
     data = ""
     try:
@@ -26,6 +27,7 @@ class Game:
     def __init__(self, s):
         self.__board = Board()
     def __init__(self,serveraddress, serverport, name):
+        print("started the game!")
         self.__board = Board()
         self.__msg_send=""
         self.__msg_recieved=""
@@ -33,6 +35,34 @@ class Game:
         self.__server_port = serverport
         self.__teamname = name
         self.__socket = None
+        self.nei = dict()
+        self.lines = list()
+
+        # generating the neighbours
+        cells = Board().get_cells()
+        for cell in cells:
+            self.nei[cell] = []
+            for j in range(3):
+                for i in range(8):
+                    if (i == cell[0] and (j + 1 == cell[1] or j - 1 == cell[1])):
+                        self.nei[cell].append((i, j))
+                    if (j == cell[1] and ((i + 1) % 8 == cell[0] or (i + 7) % 8 == cell[0])):
+                        self.nei[cell].append((i, j))
+
+        # generating lines of dooz
+        for i in range(8):
+            self.lines.append([(i, 0), (i, 1), (i, 2)])
+            # print(lines[-1])
+        for i in range(3):
+            k = 0
+            for n in range(4):
+                self.lines.append([])
+                for j in range(k, k + 3):
+                    self.lines[-1].append((j % 8, i))
+                k += 2
+                # print(lines[-1])
+        print(len(self.lines))
+
 
     def get_board(self):
         return self.__board
