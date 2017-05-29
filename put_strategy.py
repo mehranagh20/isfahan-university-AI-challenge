@@ -75,6 +75,7 @@ def find_two_ways(game):
     return ((-1, -1), "no")
 
 def put_strategy(game):
+    print("\n\n")
     print("round ", game.get_cycle())
 
     my_cells = game.get_board().get_mycells()
@@ -99,46 +100,14 @@ def put_strategy(game):
         print(two_way)
         return game.put(Pos(two_way[0][0], two_way[0][1]))
 
-    # random move
+    # here we should select one way :( or random if not possible
+    empty_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_emptycells()]
+    for cell in empty_cells:
+        my_cells.append(cell)
+        pos = pos_dooz(game, my_cells)
+        if len(pos):
+            print("puting", pos[0], ". no two way found!")
+            return game.put(Pos(pos[0][0], pos[0][1]))
+        my_cells.pop()
 
-    # make yourself a two way possible gooz
-    # empty_cells = game.get_board().get_emptycells()
-
-    # first try with just one move
-    # c, mx = None, 0
-    # for cell in empty_cells:
-    #     my_new_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in my_cells]
-    #     my_new_cells.append((cell.get_pos().getx(), cell.get_pos().gety()))
-    #     possible = pos_dooz(game, my_new_cells)
-    #     if(len(possible) > mx):
-    #         mx = len(possible)
-    #         c = (cell.get_pos().getx(), cell.get_pos().gety())
-    #
-    # if mx >= 2:
-    #     print("two way found with one move:")
-    #     print(c)
-    #     return game.put(Pos(c[0], c[1]))
-
-    # try with two move_strategy
-    # for first_cell in [(x.get_pos().getx(), x.get_pos().gety()) for x in empty_cells]:
-    #     my_new_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in my_cells]
-    #     my_new_cells.append((first_cell))
-    #     possible = pos_dooz(game, my_new_cells)
-    #     if len(possible) == 1:
-    #         continue
-    #     for second_cell in [(x.get_pos().getx(), x.get_pos().gety()) for x in empty_cells]:
-    #         if first_cell == second_cell:
-    #             continue
-    #         my_new_cells.append((second_cell))
-    #         possible = pos_dooz(game, my_new_cells)
-    #         if(len(possible) > mx):
-    #             mx = len(possible)
-    #             c = first_cell
-    #         del(my_new_cells[-1])
-    #
-    # if mx >= 2:
-    #     print("two way found with two moves")
-    #     print(c)
-    #     return game.put(Pos(c[0], c[1]))
-
-    print("\n\n")
+    # here we select a random empty_cell and put the checker there

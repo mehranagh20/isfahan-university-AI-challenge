@@ -31,7 +31,7 @@ class Game:
         self.__server_port = serverport
         self.__teamname = name
         self.__socket = None
-        self.nei = dict()
+	self.nei = dict()
         self.lines = list()
 
         # generating the neighbours
