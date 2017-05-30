@@ -44,6 +44,7 @@ class Game:
                         self.nei[cell].append((i, j))
                     if (j == cell[1] and ((i + 1) % 8 == cell[0] or (i + 7) % 8 == cell[0])):
                         self.nei[cell].append((i, j))
+        # print(self.nei)
 
         # generating lines of dooz
         for i in range(8):

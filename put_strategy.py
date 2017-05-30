@@ -1,12 +1,8 @@
 from Pos import Pos
+from random import shuffle, randrange, choice
 
-# TODO pos-dooz
-# TODO enemy-pos-dooz
-# TODO my-doozes
-# TODO enemy-doozes
-# TODO make one way and two way moves ... a function
 
-def pos_dooz(game, checkers):
+def pos_dooz(game, checkers, mp):
     doozes = []
     for dooz in game.lines:
         num_ok = 0
@@ -14,24 +10,32 @@ def pos_dooz(game, checkers):
             num_ok += 1 if checker in dooz else 0
         if num_ok == 2:
             for cell in dooz:
-                if game.get_board().get_cell(cell[0], cell[1]).get_checker() == None and cell not in checkers:
+                if mp[cell] == None and cell not in checkers:
                     doozes.append(cell)
     return doozes
+
 
 def find_two_ways(game):
     empty_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_emptycells()]
     my_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_mycells()]
+    shuffle(my_cells)
     one_move, two_move, three_move = [], [], []
+
+    mp = dict()
+    for coor, cell in game.get_board().get_cells().items():
+        mp[coor] = cell.get_checker()
 
     for first in empty_cells:
         my_cells.append(first)
-        possible = pos_dooz(game, my_cells)
+        mp[first] = True
+        possible = pos_dooz(game, my_cells, mp)
 
         if len(possible) >= 2:
-            one_move.append((-len(possible), first))
+            one_move.append(first)
 
         if len(possible):
             my_cells.pop()
+            mp[first] = None
             continue
 
         for second in empty_cells:
@@ -39,13 +43,15 @@ def find_two_ways(game):
                 continue
 
             my_cells.append(second)
-            possible = pos_dooz(game, my_cells)
+            mp[second] = True
+            possible = pos_dooz(game, my_cells, mp)
 
             if len(possible) >= 2:
-                two_move.append((-len(possible), first))
+                two_move.append(first)
 
             if len(possible):
                 my_cells.pop()
+                mp[second] = None
                 continue
 
             for third in empty_cells:
@@ -53,61 +59,93 @@ def find_two_ways(game):
                     continue
 
                 my_cells.append(third)
-                possible = pos_dooz(game, my_cells)
+                mp[third] = True
+                possible = pos_dooz(game, my_cells, mp)
 
                 if len(possible) >= 2:
-                    three_move.append((-len(possible), first))
+                    three_move.append(first)
+                mp[third] = None
                 my_cells.pop()
 
+            mp[second] = None
             my_cells.pop()
         my_cells.pop()
-
-    one_move = sorted(one_move)
-    two_move = sorted(two_move)
-    three_move = sorted(three_move)
+        mp[first] = None
 
     if len(one_move):
-        return (one_move[0][1], "one way")
+        return (one_move, "one move")
     if len(two_move):
-        return (two_move[0][1], "two way")
+        return (two_move, "two move")
     if len(three_move):
-        return (three_move[0][1], "three way")
-    return ((-1, -1), "no")
+        return (three_move, "three move")
+    return ([], "no")
+
+
+def select_inner(availables):
+    new = [x for x in availables if x[1] == 1]
+    if len(new):
+        return choice(new)
+    return choice(availables)
+
 
 def put_strategy(game):
     print("\n\n")
     print("round ", game.get_cycle())
 
     my_cells = game.get_board().get_mycells()
-    pos_doozes = pos_dooz(game, [(i.get_pos().getx(), i.get_pos().gety()) for i in my_cells])
+    shuffle(my_cells)
+    empty_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_emptycells()]
 
-    print("your possible doozes:")
-    print(pos_doozes)
+    mp = dict()
+    for coor, cell in game.get_board().get_cells().items():
+        mp[coor] = cell.get_checker()
+
+    pos_doozes = pos_dooz(game, [(i.get_pos().getx(), i.get_pos().gety()) for i in my_cells], mp)
+
+    print("your possible doozes:", pos_doozes)
 
     # dooz if you can
-    if pos_doozes:
-        return game.put(Pos(pos_doozes[0][0], pos_doozes[0][1]))
+    if len(pos_doozes):
+        cell = select_inner(pos_doozes)
+        return game.put(Pos(cell[0], cell[1]))
 
-    enemy_cells = game.get_board().get_oppcells()
-    enemy_pos_doozes = pos_dooz(game, [(i.get_pos().getx(), i.get_pos().gety()) for i in enemy_cells])
+    enemy_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_oppcells()]
+    shuffle(enemy_cells)
+    enemy_pos_doozes = pos_dooz(game, enemy_cells, mp)
 
     # prevent enemy's dooz if you can
-    if len(enemy_pos_doozes) == 1:
-        return game.put(Pos(enemy_pos_doozes[0][0], enemy_pos_doozes[0][1]))
+    if len(enemy_pos_doozes):
+        for emp in empty_cells:
+            mp[emp] = True
+            enemy_pos_doozes = pos_dooz(game, enemy_cells, mp)
+            mp[emp] = None
+            if not enemy_pos_doozes:
+                print("put for preventing enemy", emp)
+                return game.put(Pos(emp[0], emp[1]))
 
     two_way = find_two_ways(game)
-    if two_way[0] != (-1, -1):
-        print(two_way)
-        return game.put(Pos(two_way[0][0], two_way[0][1]))
+    if two_way[0]:
+        print("two_way with", two_way[1])
+        cell = select_inner(two_way[0])
+        return game.put(Pos(cell[0], cell[1]))
 
     # here we should select one way :( or random if not possible
-    empty_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_emptycells()]
+    avai = []
     for cell in empty_cells:
         my_cells.append(cell)
-        pos = pos_dooz(game, my_cells)
+        mp[cell] = True
+        pos = pos_dooz(game, my_cells, mp)
+        mp[cell] = None
         if len(pos):
-            print("puting", pos[0], ". no two way found!")
-            return game.put(Pos(pos[0][0], pos[0][1]))
+            avai.append(cell)
         my_cells.pop()
+    if avai:
+        cell = select_inner(avai)
+        print("making one way with", cell)
+        return game.put(Pos(cell[0], cell[1]))
 
-    # here we select a random empty_cell and put the checker there
+    # random move
+    shuffle(empty_cells)
+    cell = select_inner(empty_cells)
+    print("putting randomely in", cell)
+    return game.put(Pos(cell[0], cell[1]))
