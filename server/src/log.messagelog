@@ -1,0 +1,110 @@
+S 1: e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,12,12,1
+R 1: put 7,1
+S 2: e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,o,e,12,11,2
+R 2: put 1,2
+S 3: e,e,e,e,e,o,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,m,e,11,11,3
+R 3: put 2,1
+S 4: e,e,e,e,e,m,e,o,e,e,e,e,e,e,e,e,e,e,e,e,e,e,o,e,11,10,4
+R 4: put 0,1
+S 5: e,o,e,e,e,o,e,m,e,e,e,e,e,e,e,e,e,e,e,e,e,e,m,e,10,10,5
+R 5: put 0,2
+S 6: e,m,o,e,e,m,e,o,e,e,e,e,e,e,e,e,e,e,e,e,e,e,o,e,10,9,6
+R 6: put 7,2
+S 7: e,o,m,e,e,o,e,m,e,e,e,e,e,e,e,e,e,e,e,e,e,e,m,o,9,9,7
+R 7: put 6,1
+S 8: e,m,o,e,e,m,e,o,e,e,e,e,e,e,e,e,e,e,e,o,e,e,o,m,9,8,8
+R 8: put 4,1
+S 9: e,o,m,e,e,o,e,m,e,e,e,e,e,o,e,e,e,e,e,m,e,e,m,o,8,8,9
+R 9: put 3,2
+S 10: e,m,o,e,e,m,e,o,e,e,e,o,e,m,e,e,e,e,e,o,e,e,o,m,8,7,10
+R 10: put 2,2
+S 11: e,o,m,e,e,o,e,m,o,e,e,m,e,o,e,e,e,e,e,m,e,e,m,o,7,7,11
+R 11: put 0,0
+S 12: o,m,o,e,e,m,e,o,m,e,e,o,e,m,e,e,e,e,e,o,e,e,o,m,7,6,12
+R 12: put 6,0
+S 13: m,o,m,e,e,o,e,m,o,e,e,m,e,o,e,e,e,e,o,m,e,e,m,o,6,6,13
+R 13: put 4,0
+S 14: o,m,o,e,e,m,e,o,m,e,e,o,o,m,e,e,e,e,m,o,e,e,o,m,6,5,14
+R 14: put 6,2
+S 15: m,o,m,e,e,o,e,m,o,e,e,m,m,o,e,e,e,e,o,m,o,e,m,o,5,5,15
+R 15: put 2,0
+S 16: o,m,o,e,e,m,o,o,m,e,e,o,o,m,e,e,e,e,m,o,m,e,o,m,5,4,16
+R 16: put 5,0
+S 17: m,o,m,e,e,o,m,m,o,e,e,m,m,o,e,o,e,e,o,m,o,e,m,o,4,4,17
+R 17: put 1,0 5,0
+S 18: o,m,o,o,e,m,o,o,m,e,e,o,o,m,e,e,e,e,m,o,m,e,o,m,4,3,18
+R 18: put 3,0
+S 19: m,o,m,m,e,o,m,m,o,o,e,m,m,o,e,e,e,e,o,m,o,e,m,o,3,3,19
+R 19: put 1,1
+S 20: o,m,o,o,o,m,o,o,m,m,e,o,o,m,e,e,e,e,m,o,m,e,o,m,3,2,20
+R 20: put 5,0
+S 21: m,o,m,m,m,o,m,m,o,o,e,m,m,o,e,o,e,e,o,m,o,e,m,o,2,2,21
+R 21: put 3,1
+S 22: o,m,o,o,o,m,o,o,m,m,o,o,o,m,e,m,e,e,m,o,m,e,o,m,2,1,22
+R 22: put 5,2
+S 23: m,o,m,m,m,o,m,m,o,o,m,m,m,o,e,o,e,o,o,m,o,e,m,o,1,1,23
+R 23: put 5,1
+S 24: o,m,o,o,o,m,o,o,m,m,o,o,o,m,e,m,o,m,m,o,m,e,o,m,1,0,24
+R 24: put 4,2 6,1
+S 25: m,o,m,m,m,o,m,m,o,o,m,m,m,o,o,o,m,o,o,e,o,e,m,o,0,0,25
+R 25: mov 0,0,7,0
+S 26: e,m,o,o,o,m,o,o,m,m,o,o,o,m,m,m,o,m,m,e,m,o,o,m,0,0,26
+R 26: mov 0,1,0,0
+S 27: o,e,m,m,m,o,m,m,o,o,m,m,m,o,o,o,m,o,o,e,o,m,m,o,0,0,27
+R 27: mov 7,1,0,1 3,0
+S 28: m,o,o,o,o,m,o,o,m,e,o,o,o,m,m,m,o,m,m,e,m,o,e,m,0,0,28
+R 28: mov 6,2,6,1
+S 29: o,m,m,m,m,o,m,m,o,e,m,m,m,o,o,o,m,o,o,o,e,m,e,o,0,0,29
+R 29: mov 2,0,3,0 0,0
+S 30: e,o,o,o,o,m,e,o,m,o,o,o,o,m,m,m,o,m,m,m,e,o,e,m,0,0,30
+R 30: mov 5,2,6,2 4,0
+S 31: e,m,m,m,m,o,e,m,o,m,m,m,e,o,o,o,m,e,o,o,o,m,e,o,0,0,31
+R 31: mov 1,0,0,0 4,1
+S 32: o,o,o,e,o,m,e,o,m,o,o,o,e,e,m,m,o,e,m,m,m,o,e,m,0,0,32
+R 32: mov 4,2,4,1
+S 33: m,m,m,e,m,o,e,m,o,m,m,m,e,o,e,o,m,e,o,o,o,m,e,o,0,0,33
+R 33: mov 3,0,4,0
+S 34: o,o,o,e,o,m,e,o,m,e,o,o,o,m,e,m,o,e,m,m,m,o,e,m,0,0,34
+R 34: mov 6,2,5,2
+S 35: m,m,m,e,m,o,e,m,o,e,m,m,m,o,e,o,m,o,o,o,e,m,e,o,0,0,35
+R 35: mov 4,0,3,0 6,0
+S 36: o,o,o,e,o,m,e,o,m,o,o,o,e,m,e,m,o,m,e,m,e,o,e,m,0,0,36
+R 36: mov 7,2,6,2
+S 37: m,m,m,e,m,o,e,m,o,m,m,m,e,o,e,o,m,o,e,o,o,m,e,e,0,0,37
+R 37: mov 3,2,4,2
+S 38: o,o,o,e,o,m,e,o,m,o,o,e,e,m,o,m,o,m,e,m,m,o,e,e,0,0,38
+R 38: mov 5,0,6,0 3,0
+S 39: m,m,m,e,m,o,e,m,o,e,m,e,e,o,m,e,m,o,o,o,o,m,e,e,0,0,39
+R 39: mov 0,0,1,0
+S 40: e,o,o,o,o,m,e,o,m,e,o,e,e,m,o,e,o,m,m,m,m,o,e,e,0,0,40
+R 40: mov 6,2,7,2
+S 41: e,m,m,m,m,o,e,m,o,e,m,e,e,o,m,e,m,o,o,o,e,m,e,o,0,0,41
+R 41: mov 1,0,0,0 6,1
+S 42: o,o,o,e,o,m,e,o,m,e,o,e,e,m,o,e,o,m,m,e,e,o,e,m,0,0,42
+R 42: mov 2,2,3,2
+S 43: m,m,m,e,m,o,e,m,e,e,m,o,e,o,m,e,m,o,o,e,e,m,e,o,0,0,43
+R 43: mov 0,0,1,0
+S 44: e,o,o,o,o,m,e,o,e,e,o,m,e,m,o,e,o,m,m,e,e,o,e,m,0,0,44
+R 44: mov 1,2,2,2
+S 45: e,m,m,m,m,e,e,m,o,e,m,o,e,o,m,e,m,o,o,e,e,m,e,o,0,0,45
+R 45: mov 1,0,0,0 4,1
+S 46: o,o,o,e,o,e,e,o,m,e,o,m,e,e,o,e,o,m,m,e,e,o,e,m,0,0,46
+R 46: mov 5,2,6,2
+S 47: m,m,m,e,m,e,e,m,o,e,m,o,e,e,m,e,m,e,o,e,o,m,e,o,0,0,47
+R 47: mov 5,1,4,1 6,2
+S 48: o,o,o,e,o,e,e,o,m,e,o,m,e,o,o,e,e,e,m,e,e,o,e,m,0,0,48
+R 48: mov 6,0,5,0
+S 49: m,m,m,e,m,e,e,m,o,e,m,o,e,m,m,o,e,e,e,e,e,m,e,o,0,0,49
+R 49: mov 0,0,1,0
+S 50: e,o,o,o,o,e,e,o,m,e,o,m,e,o,o,m,e,e,e,e,e,o,e,m,0,0,50
+R 50: mov 7,2,7,1
+S 51: e,m,m,m,m,e,e,m,o,e,m,o,e,m,m,o,e,e,e,e,e,m,o,e,0,0,51
+R 51: mov 1,0,0,0 7,1
+S 52: o,o,o,e,o,e,e,o,m,e,o,m,e,o,o,m,e,e,e,e,e,o,e,e,0,0,52
+R 52: mov 5,0,4,0
+S 53: m,m,m,e,m,e,e,m,o,e,m,o,o,m,m,e,e,e,e,e,e,m,e,e,0,0,53
+R 53: mov 0,0,1,0
+S 54: e,o,o,o,o,e,e,o,m,e,o,m,m,o,o,e,e,e,e,e,e,o,e,e,0,0,54
+R 54: mov 4,0,3,0
+S 55: e,m,m,m,m,e,e,m,o,o,m,o,e,m,m,e,e,e,e,e,e,m,e,e,0,0,55
+R 55: mov 1,0,0,0 3,2
