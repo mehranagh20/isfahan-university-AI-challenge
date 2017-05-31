@@ -137,20 +137,7 @@ def put_strategy(game):
                 print("put for preventing enemy", emp)
                 return game.put(Pos(emp[0], emp[1]))
 
-    enemy_pos_doozes = pos_dooz(game, enemy_cells, mp)
     two_way = find_two_ways(game)
-    if not enemy_pos_doozes and two_way[1] == "two move":
-        for emp in empty_cells:
-            enemy_cells.append(emp)
-            mp[emp] = True
-            enemy_pos_doozes = pos_dooz(game, enemy_cells, mp)
-            mp[emp] = None
-            enemy_cells.pop()
-            if len(enemy_pos_doozes) > 1:
-                print("preventinf from making two way")
-                return game.put(Pos(emp[0], emp[1]))
-
-
     if two_way[0]:
         print("two_way with", two_way[1])
         cell = restrict_enemy(game, two_way[0], mp, enemy_cells)
