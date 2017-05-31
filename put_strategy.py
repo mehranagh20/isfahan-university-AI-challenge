@@ -147,7 +147,7 @@ def put_strategy(game):
             mp[emp] = None
             enemy_cells.pop()
             if len(enemy_pos_doozes) > 1:
-                print("preventinf from making two way")
+                print("preventing enemy from making two way")
                 return game.put(Pos(emp[0], emp[1]))
 
 

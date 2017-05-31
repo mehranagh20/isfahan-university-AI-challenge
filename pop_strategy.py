@@ -88,6 +88,22 @@ def best_pop_dooz_based(game, checkers):
 
     return cell
 
+
+def can_enemy_make_two_way(game, enemy_cells, empty_cells, mp):
+    probable = False
+    for emp in empty_cells:
+        mp[emp] = True
+        enemy_cells.append(emp)
+        still_pos_doozes = pos_dooz_put(game, enemy_cells, mp)
+        if len(still_pos_doozes) > 1:
+            probable = True
+        mp[emp] = None
+        enemy_cells.pop()
+        if probable:
+            break
+    return probable
+
+
 def pop_strategy(game):
     # return game.pop(checker)
     print("\n\n")
@@ -129,6 +145,29 @@ def pop_strategy(game):
             cell = best_pop_dooz_based(game, all_good_pops)
             print("poping for prevent", cell)
             return game.pop(game.get_board().get_cell(cell[0], cell[1]).get_checker())
+
+    # preventing enemy from making two way
+    if cycle < 24:
+        avai = []
+        still_pos_doozes = pos_dooz_put(game, enemy_cells, mp)
+        empty_cells = [(x.get_pos().getx(), x.get_pos().gety()) for x in game.get_board().get_emptycells()]
+        if not still_pos_doozes:
+            probable = can_enemy_make_two_way(game, enemy_cells, empty_cells, mp)
+            if probable:
+                for cell in enemy_cells:
+                    new_enemy_cells = [x for x in enemy_cells if x != cell]
+                    empty_cells.append(cell)
+                    mp[cell] = None
+                    probable = can_enemy_make_two_way(game, new_enemy_cells, empty_cells, mp)
+                    mp[cell] = True
+                    empty_cells.pop()
+                    if not probable:
+                        avai.append(cell)
+                if avai:
+                    cell = best_pop_dooz_based(game, avai)
+                    print("poping for preventing enemy from making two way")
+                    return game.pop(game.get_board().get_cell(cell[0], cell[1]).get_checker())
+
 
     cell = best_pop_dooz_based(game, enemy_cells)
     print("poping", cell)
